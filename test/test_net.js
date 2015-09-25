@@ -23,7 +23,6 @@ var should = chai.should();
 var net = require('../');
 
 var Node = require('../lib/node');
-var NodeCol = require('../lib/nodecol');
 var Edge = require('../lib/edge');
 var EdgeCol = require('../lib/edgecol');
 var Layer = require('../lib/layer');
@@ -38,117 +37,6 @@ var fs = require('fs');
 var aspects = fs.readFileSync('./data/Aspects.txt', 'utf8');
 var nodes = fs.readFileSync('./data/Nodes.txt', 'utf8');
 var edges = fs.readFileSync('./data/edges.txt', 'utf8');
-
-
-//var nodes = 'Time,node\n now,1\n now,2\n now,3\n now,4\n then, 1\n then, 2\n then, 3\n then, 4';
-
-//var edges = [
-//        {
-//            "src": {
-//                "aspect1": "now",
-//                "name": "1"
-//            },
-//            "dest": {
-//                "aspect1": "now",
-//                "name": "4"
-//            }
-//        },
-//        {
-//            "src": {
-//                "aspect1": "now",
-//                "name": "2"
-//            },
-//            "dest": {
-//                "aspect1": "now",
-//                "name": "3"
-//            }
-//        },
-//        {
-//            "src": {
-//                "aspect1": "now",
-//                "name": "2"
-//            },
-//            "dest": {
-//                "aspect1": "now",
-//                "name": "4"
-//            }
-//        },
-//        {
-//            "src": {
-//                "aspect1": "now",
-//                "name": "1"
-//            },
-//            "dest": {
-//                "aspect1": "then",
-//                "name": "1"
-//            }
-//        },
-//        {
-//            "src": {
-//                "aspect1": "now",
-//                "name": "2"
-//            },
-//            "dest": {
-//                "aspect1": "then",
-//                "name": "2"
-//            }
-//        },
-//        {
-//            "src": {
-//                "aspect1": "now",
-//                "name": "3"
-//            },
-//            "dest": {
-//                "aspect1": "then",
-//                "name": "3"
-//            }
-//        },
-//        {
-//            "src": {
-//                "aspect1": "now",
-//                "name": "4"
-//            },
-//            "dest": {
-//                "aspect1": "then",
-//                "name": "4"
-//            }
-//        },
-//        {
-//            "src": {
-//                "aspect1": "then",
-//                "name": "1"
-//            },
-//            "dest": {
-//                "aspect1": "then",
-//                "name": "2"
-//            }
-//        },
-//        {
-//            "src": {
-//                "aspect1": "then",
-//                "name": "1"
-//            },
-//            "dest": {
-//                "aspect1": "then",
-//                "name": "3"
-//            }
-//        },
-//        {
-//            "src": {
-//                "aspect1": "then",
-//                "name": "2"
-//            },
-//            "dest": {
-//                "aspect1": "then",
-//                "name": "3"
-//            }
-//        }
-//    ];
-
-//var edges = 'now, 1, now, 4\n now, 2, now, 3\n now, 2, now, 4\n now, 1, then, 1\n now, 2, then, 2\n now, 3, then, 3\n \
-//now, 4, then, 4\n then, 1, then, 2\n then, 1, then, 3\n then, 2, then, 3';
-
-
 
 /*
  Parser
@@ -238,23 +126,23 @@ describe('Edge Module:', function() {
             this.aspects = this.parser.readAspects(aspects);
             this.nodes = this.parser.readNodes(nodes);
             this.edges = this.parser.readEdges(edges);
-            this.node1 = new Node(this.nodes[0].name);
-            this.layer1 = new Layer(this.aspects, this.nodes[0]);
-            this.nodelayer1 = new Nodelayer(this.nodes[0].id, this.node1, this.layer1);
-            this.node2 = new Node(this.nodes[1].name);
-            this.layer2 = new Layer(this.aspects, this.nodes[1]);
-            this.nodelayer2 = new Nodelayer(this.nodes[1].id, this.node2, this.layer2);
-            this.edge = new Edge(this.nodelayer1, this.nodelayer2);
+            var node1 = new Node(this.nodes[0].name);
+            var node2 = new Node(this.nodes[1].name);
+            var layer1 = new Layer(this.aspects, this.nodes[0]);
+            var layer2 = new Layer(this.aspects, this.nodes[1]);
+            var nodelayer1 = new Nodelayer(this.nodes[0].id, node1, layer1);
+            var nodelayer2 = new Nodelayer(this.nodes[1].id, node2, layer2);
+            this.edge = new Edge(nodelayer1.get("id"), nodelayer2.get("id"), 'undirected');
         });
 
         it('should contain a src node of type Nodelayer', function() {
             should.exist(this.edge.get('src'));
-            expect(this.edge.get('src')).to.be.instanceOf(Nodelayer);
+            expect(this.edge.get('src')).to.be.a('string');
         });
 
         it('should contain a target node of type Nodelayer', function() {
             should.exist(this.edge.get('target'));
-            expect(this.edge.get('target')).to.be.instanceOf(Nodelayer);
+            expect(this.edge.get('target')).to.be.a('string');
         });
 
         it('should have a defined name', function() {
@@ -270,11 +158,7 @@ describe('Edge Module:', function() {
 describe('Mplexnet Module:', function() {
     describe('Network', function() {
         beforeEach(function(){
-            this.parser = new Parser();
-            this.aspects = this.parser.readAspects(aspects);
-            this.nodes = this.parser.readNodes(nodes);
-            this.edges = this.parser.readEdges(edges);
-            this.network = new Network(this.nodes, this.edges, this.aspects);
+            this.network = new Network(nodes, edges, aspects);
         });
 
         it('should contain nodes as nodelayers', function() {
@@ -284,10 +168,16 @@ describe('Mplexnet Module:', function() {
         it('should contain edges', function() {
             expect(this.network.edges).to.be.defined;
             expect(this.network.edges).to.be.an.instanceof(EdgeCol);
+            expect(this.network.edges.length).to.be.above(1);
         });
 
         it('should contain the aspects of the network', function() {
             expect(this.network.aspects).to.be.defined;
+        });
+
+        it('should create the right number of edges', function () {
+            var edges = this.network.edges;
+            expect(edges.length).to.equal(10);
         });
     })
 });

@@ -22,15 +22,16 @@ var nodes = fs.readFileSync('./data/Nodes.txt', 'utf8');
 var edges = fs.readFileSync('./data/edges.txt', 'utf8');
 
 
-var parser = new Parser();
-aspects = parser.readAspects(aspects);
-nodes = parser.readNodes(nodes);
-edges = parser.readEdges(edges);
+
 var network = new Network(nodes, edges, aspects);
 
 var nodelayers = network.nodelayers;
 nodelayers.each(function(nlayer) {
    console.log("Nodelayer Id: " + nlayer.get("id"));
+});
+var edges_ = network.edges;
+edges_.each(function (edge) {
+   console.log("Source: " + edge.get("source") + "Target: " + edge.get("target"));
 });
 
 
