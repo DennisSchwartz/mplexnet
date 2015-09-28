@@ -162,21 +162,22 @@ describe('Mplexnet Module:', function() {
         });
 
         it('should contain nodes as nodelayers', function() {
-            expect(this.network.nodelayers).to.be.an.instanceof(Nodelayers);
+            expect(this.network.get('nodes')).to.be.an.instanceof(Nodelayers);
         });
 
         it('should contain edges', function() {
-            expect(this.network.edges).to.be.defined;
-            expect(this.network.edges).to.be.an.instanceof(EdgeCol);
-            expect(this.network.edges.length).to.be.above(1);
+            var edges = this.network.get('edges');
+            expect(edges).to.be.defined;
+            expect(edges).to.be.an.instanceof(EdgeCol);
+            expect(edges.length).to.be.above(1);
         });
 
         it('should contain the aspects of the network', function() {
-            expect(this.network.aspects).to.be.defined;
+            expect(this.network.get('aspects')).to.be.defined;
         });
 
         it('should create the right number of edges', function () {
-            var edges = this.network.edges;
+            var edges = this.network.get('edges');
             expect(edges.length).to.equal(10);
         });
     })
