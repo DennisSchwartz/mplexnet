@@ -135,12 +135,12 @@ describe('Edge Module:', function() {
             this.edge = new Edge(nodelayer1.get("id"), nodelayer2.get("id"), 'undirected');
         });
 
-        it('should contain a src node of type Nodelayer', function() {
-            should.exist(this.edge.get('src'));
-            expect(this.edge.get('src')).to.be.a('string');
+        it('should contain a source nodelayer id of type String', function() {
+            should.exist(this.edge.get('source'));
+            expect(this.edge.get('source')).to.be.a('string');
         });
 
-        it('should contain a target node of type Nodelayer', function() {
+        it('should contain a target nodelayer id of type String', function() {
             should.exist(this.edge.get('target'));
             expect(this.edge.get('target')).to.be.a('string');
         });

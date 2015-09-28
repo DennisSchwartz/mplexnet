@@ -31,7 +31,7 @@ nodelayers.each(function(nlayer) {
 });
 var edges_ = network.edges;
 edges_.each(function (edge) {
-   console.log("Source: " + edge.get("source") + "Target: " + edge.get("target"));
+   console.log("Source: " + edge.get("source") + ", Target: " + edge.get("target"));
 });
 
 
