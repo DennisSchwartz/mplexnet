@@ -14,13 +14,18 @@ var fs = require('fs');
 
 // mock data for tests:
 
-var aspects = fs.readFileSync('./data/Aspects.txt', 'utf8');
-var nodes = fs.readFileSync('./data/Nodes.txt', 'utf8');
-var edges = fs.readFileSync('./data/edges.txt', 'utf8');
+//var aspects = fs.readFileSync('./data/Aspects.txt', 'utf8');
+//var nodes = fs.readFileSync('./data/Nodes.txt', 'utf8');
+//var edges = fs.readFileSync('./data/edges.txt', 'utf8');
+//
+//input = {};
+//input.aspects = aspects;
+//input.nodes = nodes;
+//input.edges = edges;
 
+var input = fs.readFileSync('./data/single.txt', 'utf8');
 
-
-var network = new Network(nodes, edges, aspects);
+var network = new Network(input);
 
 var nodelayers = network.get("nodes");
 nodelayers.each(function(nlayer) {
