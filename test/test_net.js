@@ -31,12 +31,20 @@ var Nodelayers = require('../lib/nodelayers');
 var Network = require('../lib/network');
 var Parser = require('../lib/parser');
 var fs = require('fs');
+var Options = require('../lib/options');
+var Baby = require("babyparse");
 
 // mock data for tests:
 
 var aspects = fs.readFileSync('./data/Aspects.txt', 'utf8');
 var nodes = fs.readFileSync('./data/Nodes.txt', 'utf8');
 var edges = fs.readFileSync('./data/edges.txt', 'utf8');
+
+var input = {};
+input.aspects = aspects;
+input.nodes = nodes;
+input.edges = edges;
+
 
 /*
  Parser
@@ -156,9 +164,9 @@ describe('Edge Module:', function() {
 });
 
 describe('Mplexnet Module:', function() {
-    describe('Network', function() {
+    describe('Network from multiple files', function() {
         beforeEach(function(){
-            this.network = new Network(nodes, edges, aspects);
+            this.network = new Network(input);
         });
 
         it('should contain nodes as nodelayers', function() {
@@ -180,5 +188,17 @@ describe('Mplexnet Module:', function() {
             var edges = this.network.get('edges');
             expect(edges.length).to.equal(10);
         });
-    })
+    });
+    describe('Network from single file', function () {
+        before(function () {
+            Options.inputFiles = 'single';
+            var file = fs.readFileSync('./data/single.txt', 'utf-8');
+            file = file.replace(/ /g, ''); //remove whitespace
+            var input = Baby.parse(file);//, { header: true });
+            var network = new Network(input);
+        });
+        it('should do sth', function () {
+
+        });
+    });
 });
