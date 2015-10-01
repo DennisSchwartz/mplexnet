@@ -19,7 +19,7 @@ var _ = require('lodash');
 var expect = require('chai').expect;
 var should = chai.should();
 
-// requires your main app (specified in index.js)
+// requires your main app (specified in mplexnet.js)
 var net = require('../');
 
 var Node = require('../lib/node');
@@ -28,7 +28,7 @@ var EdgeCol = require('../lib/edgecol');
 var Layer = require('../lib/layer');
 var Nodelayer = require('../lib/nodelayer');
 var Nodelayers = require('../lib/nodelayers');
-var Network = require('../lib/mplexnet');
+var Network = require('../lib/network');
 var Parser = require('../lib/parser');
 var fs = require('fs');
 

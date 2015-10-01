@@ -6,12 +6,9 @@
  * Licensed under the MIT license.
  */
 
-/**
- @class mplexnet
- */
 
 var Parser = require("./lib/parser");
-var Network = require("./lib/mplexnet");
+var Network = require("./lib/network");
 
 var fs = require('fs');
 
@@ -25,11 +22,11 @@ var edges = fs.readFileSync('./data/edges.txt', 'utf8');
 
 var network = new Network(nodes, edges, aspects);
 
-var nodelayers = network.nodelayers;
+var nodelayers = network.get("nodes");
 nodelayers.each(function(nlayer) {
    console.log("Nodelayer Id: " + nlayer.get("id"));
 });
-var edges_ = network.edges;
+var edges_ = network.get("edges");
 edges_.each(function (edge) {
    console.log("Source: " + edge.get("source") + ", Target: " + edge.get("target"));
 });
