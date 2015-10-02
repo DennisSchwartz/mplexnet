@@ -8,31 +8,21 @@
 
 // chai is an assertion library
 var chai = require('chai');
-
-// @see http://chaijs.com/api/assert/
-var assert = chai.assert;
-
-var _ = require('lodash');
-
 // register alternative styles
 // @see http://chaijs.com/api/bdd/
 var expect = require('chai').expect;
 var should = chai.should();
-
-// requires your main app (specified in mplexnet.js)
-var net = require('../');
-
-var Node = require('../lib/node');
-var Edge = require('../lib/edge');
-var EdgeCol = require('../lib/edgecol');
-var Layer = require('../lib/layer');
-var Nodelayer = require('../lib/nodelayer');
-var Nodelayers = require('../lib/nodelayers');
+var _ = require('lodash');
+var Node = require('../lib/node/node');
+var Edge = require('../lib/edge/edge');
+var EdgeCol = require('../lib/edge/edgecol');
+var Layer = require('../lib/layer/layer');
+var Nodelayer = require('../lib/nodelayer/nodelayer');
+var Nodelayers = require('../lib/nodelayer/nodelayers');
 var Network = require('../lib/network');
 var Parser = require('../lib/parser');
 var fs = require('fs');
 var Options = require('../lib/options');
-var Baby = require("babyparse");
 
 // mock data for tests:
 
@@ -45,6 +35,33 @@ input.aspects = aspects;
 input.nodes = nodes;
 input.edges = edges;
 
+
+/*
+    Test node module
+ */
+
+describe('Multilayer Network', function () {
+    describe('Node module', function () {
+        describe('Node', function () {
+            var good;
+            beforeEach(function () {
+               good = new Node('test');
+            });
+            it('should exist', function () {
+                should.exist(good);
+            });
+            it('should have an id', function () {
+                good.get('id').should.not.equal('undefined');
+            });
+            it('should have the right id', function () {
+                good.get('id').should.equal('test');
+            })
+        })
+    });
+    describe('Layer module', function () {
+
+    })
+});
 
 /*
  Parser
@@ -71,8 +88,8 @@ describe('Parser Module: ', function() {
 describe('Node Model', function() {
     describe('Node', function() {
         beforeEach(function() {
-            this.name = 1;
-            this.node = new Node(this.name);
+            this.id = 1;
+            this.node = new Node(this.id);
         });
 
         it('should be created', function() {
@@ -80,11 +97,11 @@ describe('Node Model', function() {
         });
 
         it('should contain a name', function() {
-            should.exist(this.node.get('name'));
+            should.exist(this.node.get('id'));
         });
 
         it('should have a name as has been set', function() {
-            expect(this.node.get("name")).to.equal(this.name);
+            expect(this.node.get("id")).to.equal(this.id);
         });
 
         it('should be an instance of the Node model', function() {
