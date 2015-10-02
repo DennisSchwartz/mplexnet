@@ -13,16 +13,16 @@ var chai = require('chai');
 var expect = require('chai').expect;
 var should = chai.should();
 var _ = require('lodash');
-var Node = require('../lib/node/node');
-var Edge = require('../lib/edge/edge');
-var EdgeCol = require('../lib/edge/edgecol');
-var Layer = require('../lib/layer/layer');
-var Nodelayer = require('../lib/nodelayer/nodelayer');
-var Nodelayers = require('../lib/nodelayer/nodelayers');
-var Network = require('../lib/network');
-var Parser = require('../lib/parser');
+var mplexnet = require('../lib/mplexnet');
+var Node = mplexnet.Node;
+var Edge = mplexnet.Edge;
+var EdgeCol = mplexnet.EdgeCollection;
+var Layer = mplexnet.Layer;
+var Nodelayer = mplexnet.Nodelayer;
+var Nodelayers = mplexnet.NodelayerCollection;
+var Network = mplexnet.Network;
 var fs = require('fs');
-var Options = require('../lib/options');
+var Options = mplexnet.Options;
 
 // mock data for tests:
 
@@ -73,32 +73,14 @@ describe('Multilayer Network', function () {
     })
 });
 
-/*
- Parser
- */
-
-describe('Parser Module: ', function() {
-    before(function () {
-        this.parser = new Parser();
-        this.aspects = this.parser.readAspects(aspects);
-        this.nodes = this.parser.readNodes(nodes);
-        this.edges = this.parser.readEdges(edges);
-    });
-    describe('Parser', function() {
-        it('should create a csv parser object', function() {
-            expect(this.parser).to.exist;
-        });
-    })
-});
 
 
 describe('Nodelayer module', function (){
     describe('Nodelayer', function() {
         before(function () {
-            this.parser = new Parser();
-            this.aspects = this.parser.readAspects(aspects);
-            this.nodes = this.parser.readNodes(nodes);
-            this.edges = this.parser.readEdges(edges);
+            this.aspects = mplexnet.parse(aspects)[0];
+            this.nodes = mplexnet.parse(nodes, true);
+            this.edges = mplexnet.parse(edges, true);
             this.node = new Node(this.nodes[0].name);
             this.layer = new Layer(this.aspects, this.nodes[0]);
             this.nodelayer = new Nodelayer(this.nodes[0].id, this.node, this.layer);
@@ -129,10 +111,9 @@ describe('Nodelayer module', function (){
 describe('Edge Module:', function() {
     describe('Edge', function() {
         before(function() {
-            this.parser = new Parser();
-            this.aspects = this.parser.readAspects(aspects);
-            this.nodes = this.parser.readNodes(nodes);
-            this.edges = this.parser.readEdges(edges);
+            this.aspects = mplexnet.parse(aspects)[0];
+            this.nodes = mplexnet.parse(nodes, true);
+            this.edges = mplexnet.parse(edges, true);
             var node1 = new Node(this.nodes[0].name);
             var node2 = new Node(this.nodes[1].name);
             var layer1 = new Layer(this.aspects, this.nodes[0]);
