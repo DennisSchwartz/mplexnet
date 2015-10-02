@@ -37,17 +37,15 @@ input.edges = edges;
 
 
 /*
-    Test node module
+    Test the network module
  */
 
 describe('Multilayer Network', function () {
     describe('Node module', function () {
         describe('Node', function () {
             var good;
-            var bad;
             beforeEach(function () {
                 good = new Node('test');
-                bad = new Node([]);
             });
             it('should exist', function () {
                 should.exist(good);
@@ -62,6 +60,7 @@ describe('Multilayer Network', function () {
                 expect(good).to.be.an.instanceOf(Node);
             });
             it('should reject ids that are not strings or numbers', function () {
+                var bad = function () { new Node([]) };
                 expect(bad).to.throw(TypeError);
             });
         });
