@@ -44,8 +44,10 @@ describe('Multilayer Network', function () {
     describe('Node module', function () {
         describe('Node', function () {
             var good;
+            var bad;
             beforeEach(function () {
-               good = new Node('test');
+                good = new Node('test');
+                bad = new Node([]);
             });
             it('should exist', function () {
                 should.exist(good);
@@ -55,7 +57,16 @@ describe('Multilayer Network', function () {
             });
             it('should have the right id', function () {
                 good.get('id').should.equal('test');
-            })
+            });
+            it('should be an instance of the Node model', function() {
+                expect(good).to.be.an.instanceOf(Node);
+            });
+            it('should reject ids that are not strings or numbers', function () {
+                expect(bad).to.throw(TypeError);
+            });
+        });
+        describe('Node collection', function () {
+
         })
     });
     describe('Layer module', function () {
@@ -81,34 +92,6 @@ describe('Parser Module: ', function() {
     })
 });
 
-/*
- Node Model
- */
-
-describe('Node Model', function() {
-    describe('Node', function() {
-        beforeEach(function() {
-            this.id = 1;
-            this.node = new Node(this.id);
-        });
-
-        it('should be created', function() {
-            should.exist(this.node);
-        });
-
-        it('should contain a name', function() {
-            should.exist(this.node.get('id'));
-        });
-
-        it('should have a name as has been set', function() {
-            expect(this.node.get("id")).to.equal(this.id);
-        });
-
-        it('should be an instance of the Node model', function() {
-            expect(this.node).to.be.an.instanceOf(Node);
-        })
-    });
-});
 
 describe('Nodelayer module', function (){
     describe('Nodelayer', function() {
