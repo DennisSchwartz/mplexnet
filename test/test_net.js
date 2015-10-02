@@ -191,10 +191,18 @@ describe('Mplexnet Module:', function() {
     });
     describe('Network from single file', function () {
         before(function () {
-            Options.inputFiles = 'single';
-            var file = fs.readFileSync('./data/single.txt', 'utf-8');
-            file = file.replace(/ /g, ''); //remove whitespace
-            var input = Baby.parse(file);//, { header: true });
+            //var file = fs.readFileSync('./data/single.txt', 'utf-8');
+            var file = fs.readFileSync('../Thesis/dataprep/data.csv', 'utf-8');
+            var input = {};
+            input.edges = file;
+            //file = file.replace(/ /g, ''); //remove whitespace
+            //var input = Baby.parse(file);//, { header: true });
+            input.options = {
+                inputFiles: 'single',
+                inputFileDelimiter: ';',
+                sourceFieldLabel: 'source_name',
+                targetFieldLabel: 'target_name'
+            };
             var network = new Network(input);
         });
         it('should do sth', function () {
