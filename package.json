@@ -1,7 +1,7 @@
 {
   "name": "mplexnet",
-  "description": "A model for Multilayer/Conplex Networks",
-  "version": "0.1.0",
+  "description": "A model for Multilayer/Complex Networks",
+  "version": "0.2.0",
   "homepage": "https://github.com/DennisSchwartz/mplex-net",
   "author": {
     "name": "Dennis Schwartz",
@@ -30,7 +30,6 @@
   "dependencies": {
     "babyparse": "^0.4.3",
     "backbone": "^1.2.3",
-    "jquery": "^2.1.4",
     "lodash": "^3.10.1"
   },
   "devDependencies": {
@@ -39,9 +38,6 @@
     "browserify": "^11.2.0",
     "chai": "^3.3.0",
     "mocha": "^2.3.3",
-    "sinon": "^1.17.0",
-    "sinon-chai": "^2.8.0",
-    "testem": "^0.9.5",
     "watchify": "^3.4.0"
   },
   "keywords": [
@@ -50,6 +46,6 @@
     "network",
     "multiplex",
     "networks",
-    "biojs"
+    "biology"
   ]
 }
