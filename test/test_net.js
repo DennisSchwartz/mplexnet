@@ -174,7 +174,7 @@ describe('Mplexnet Module:', function() {
             //var file = fs.readFileSync('./data/single.txt', 'utf-8');
             var file = fs.readFileSync('../Thesis/dataprep/data.csv', 'utf-8');
             var input = {};
-            input.edges = file;
+            input.data = file;
             //file = file.replace(/ /g, ''); //remove whitespace
             //var input = Baby.parse(file);//, { header: true });
             input.options = {
