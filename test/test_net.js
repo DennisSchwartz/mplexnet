@@ -175,17 +175,17 @@ describe('Mplexnet Module:', function() {
             //var file = fs.readFileSync('./data/single.txt', 'utf-8');
             var file = fs.readFileSync('../Thesis/dataprep/500.csv', 'utf-8');
             var input = {};
-            var test = 'source,l1,l2,target,l1,l2\n1,A,X,2,A,X\n1,A,X,1,B,X\n1,A,X,4,B,X\n1,B,X,1,B,Y\n1,B,X,3,B,X\n\
-                        1,B,X,4,B,X\n3,B,X,4,B,X\n4,B,X,3,A,Y\n3,A,Y,3,A,X\n3,A,Y,2,A,Y';
+            //var test = 'source,l1,l2,target,l1,l2\n1,A,X,2,A,X\n1,A,X,1,B,X\n1,A,X,4,B,X\n1,B,X,1,B,Y\n1,B,X,3,B,X\n\
+            //            1,B,X,4,B,X\n3,B,X,4,B,X\n4,B,X,3,A,Y\n3,A,Y,3,A,X\n3,A,Y,2,A,Y';
 
-            input.data = test;
+            input.data = file;
             //file = file.replace(/ /g, ''); //remove whitespace
             //var input = Baby.parse(file);//, { header: true });
             input.options = {
                 inputFiles: 'single',
-                inputFileDelimiter: ',',
-                sourceFieldLabel: 'source',
-                targetFieldLabel: 'target'
+                inputFileDelimiter: ';',
+                sourceFieldLabel: 'source_name',
+                targetFieldLabel: 'target_name'
             };
             network = new Network(input);
         });
