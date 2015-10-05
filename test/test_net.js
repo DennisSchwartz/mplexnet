@@ -170,23 +170,30 @@ describe('Mplexnet Module:', function() {
         });
     });
     describe('Network from single file', function () {
+        var network;
         before(function () {
             //var file = fs.readFileSync('./data/single.txt', 'utf-8');
-            var file = fs.readFileSync('../Thesis/dataprep/data.csv', 'utf-8');
+            var file = fs.readFileSync('../Thesis/dataprep/500.csv', 'utf-8');
             var input = {};
-            input.data = file;
+            var test = 'source,l1,l2,target,l1,l2\n1,A,X,2,A,X\n1,A,X,1,B,X\n1,A,X,4,B,X\n1,B,X,1,B,Y\n1,B,X,3,B,X\n\
+                        1,B,X,4,B,X\n3,B,X,4,B,X\n4,B,X,3,A,Y\n3,A,Y,3,A,X\n3,A,Y,2,A,Y';
+
+            input.data = test;
             //file = file.replace(/ /g, ''); //remove whitespace
             //var input = Baby.parse(file);//, { header: true });
             input.options = {
                 inputFiles: 'single',
-                inputFileDelimiter: ';',
-                sourceFieldLabel: 'source_name',
-                targetFieldLabel: 'target_name'
+                inputFileDelimiter: ',',
+                sourceFieldLabel: 'source',
+                targetFieldLabel: 'target'
             };
-            var network = new Network(input);
+            network = new Network(input);
         });
         it('should do sth', function () {
-
+            network.get('edges').each(function (x) {
+                console.log('Source: ' + x.get('source'));
+                console.log('Target: ' + x.get('target'));
+            })
         });
     });
 });
