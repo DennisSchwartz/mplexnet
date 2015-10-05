@@ -8,11 +8,19 @@
 
 // chai is an assertion library
 var chai = require('chai');
+
+// @see http://chaijs.com/api/assert/
+var assert = chai.assert;
+
+var _ = require('lodash');
+
 // register alternative styles
 // @see http://chaijs.com/api/bdd/
 var expect = require('chai').expect;
 var should = chai.should();
-var _ = require('lodash');
+
+// requires your main app (specified in mplexnet.js)
+
 var mplexnet = require('../lib/mplexnet');
 var Node = mplexnet.Node;
 var Edge = mplexnet.Edge;
@@ -21,8 +29,10 @@ var Layer = mplexnet.Layer;
 var Nodelayer = mplexnet.Nodelayer;
 var Nodelayers = mplexnet.NodelayerCollection;
 var Network = mplexnet.Network;
+var parse = mplexnet.parse;
 var fs = require('fs');
 var Options = mplexnet.Options;
+var Baby = require("babyparse");
 
 // mock data for tests:
 
@@ -37,50 +47,40 @@ input.edges = edges;
 
 
 /*
-    Test the network module
+ Node Model
  */
 
-describe('Multilayer Network', function () {
-    describe('Node module', function () {
-        describe('Node', function () {
-            var good;
-            beforeEach(function () {
-                good = new Node('test');
-            });
-            it('should exist', function () {
-                should.exist(good);
-            });
-            it('should have an id', function () {
-                good.get('id').should.not.equal('undefined');
-            });
-            it('should have the right id', function () {
-                good.get('id').should.equal('test');
-            });
-            it('should be an instance of the Node model', function() {
-                expect(good).to.be.an.instanceOf(Node);
-            });
-            it('should reject ids that are not strings or numbers', function () {
-                var bad = function () { new Node([]) };
-                expect(bad).to.throw(TypeError);
-            });
+describe('Node Model', function() {
+    describe('Node', function() {
+        beforeEach(function() {
+            this.id = 1;
+            this.node = new Node(this.id);
         });
-        describe('Node collection', function () {
 
+        it('should be created', function() {
+            should.exist(this.node);
+        });
+
+        it('should contain a name', function() {
+            should.exist(this.node.get('id'));
+        });
+
+        it('should have a name as has been set', function() {
+            expect(this.node.get("id")).to.equal(this.id);
+        });
+
+        it('should be an instance of the Node model', function() {
+            expect(this.node).to.be.an.instanceOf(Node);
         })
     });
-    describe('Layer module', function () {
-
-    })
 });
-
-
 
 describe('Nodelayer module', function (){
     describe('Nodelayer', function() {
         before(function () {
-            this.aspects = mplexnet.parse(aspects)[0];
-            this.nodes = mplexnet.parse(nodes, true);
-            this.edges = mplexnet.parse(edges, true);
+            this.aspects = parse(input.aspects)[0];
+            this.nodes = parse(input.nodes, true);
+            this.edges = parse(input.edges, true);
             this.node = new Node(this.nodes[0].name);
             this.layer = new Layer(this.aspects, this.nodes[0]);
             this.nodelayer = new Nodelayer(this.nodes[0].id, this.node, this.layer);
@@ -111,9 +111,9 @@ describe('Nodelayer module', function (){
 describe('Edge Module:', function() {
     describe('Edge', function() {
         before(function() {
-            this.aspects = mplexnet.parse(aspects)[0];
-            this.nodes = mplexnet.parse(nodes, true);
-            this.edges = mplexnet.parse(edges, true);
+            this.aspects = parse(input.aspects)[0];
+            this.nodes = parse(input.nodes, true);
+            this.edges = parse(input.edges, true);
             var node1 = new Node(this.nodes[0].name);
             var node2 = new Node(this.nodes[1].name);
             var layer1 = new Layer(this.aspects, this.nodes[0]);
@@ -134,7 +134,7 @@ describe('Edge Module:', function() {
         });
 
         it('should have a defined name', function() {
-            expect(this.edge.get('name')).to.be.defined;
+            expect(this.edge.get('id')).to.be.defined;
         });
 
         it('should assign an name automatically based on the node ids', function() {
@@ -173,12 +173,9 @@ describe('Mplexnet Module:', function() {
         var network;
         before(function () {
             //var file = fs.readFileSync('./data/single.txt', 'utf-8');
-            var file = fs.readFileSync('../Thesis/dataprep/500.csv', 'utf-8');
+            var file = fs.readFileSync('../Thesis/dataprep/data.csv', 'utf-8');
             var input = {};
-            //var test = 'source,l1,l2,target,l1,l2\n1,A,X,2,A,X\n1,A,X,1,B,X\n1,A,X,4,B,X\n1,B,X,1,B,Y\n1,B,X,3,B,X\n\
-            //            1,B,X,4,B,X\n3,B,X,4,B,X\n4,B,X,3,A,Y\n3,A,Y,3,A,X\n3,A,Y,2,A,Y';
-
-            input.data = file;
+            input.edges = file;
             //file = file.replace(/ /g, ''); //remove whitespace
             //var input = Baby.parse(file);//, { header: true });
             input.options = {
@@ -190,10 +187,7 @@ describe('Mplexnet Module:', function() {
             network = new Network(input);
         });
         it('should do sth', function () {
-            network.get('edges').each(function (x) {
-                console.log('Source: ' + x.get('source'));
-                console.log('Target: ' + x.get('target'));
-            })
+            //console.log(network);
         });
     });
 });

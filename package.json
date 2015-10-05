@@ -33,7 +33,6 @@
     "lodash": "^3.10.1"
   },
   "devDependencies": {
-    "mkdirp": "^0.5.0",
     "mocha": "1.x",
     "browserify": "^11.2.0",
     "chai": "^3.3.0",
