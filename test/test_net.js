@@ -20,7 +20,6 @@ var expect = require('chai').expect;
 var should = chai.should();
 
 // requires your main app (specified in mplexnet.js)
-var net = require('../');
 
 var mplexnet = require('../lib/mplexnet');
 var Node = mplexnet.Node;
@@ -30,7 +29,7 @@ var Layer = mplexnet.Layer;
 var Nodelayer = mplexnet.Nodelayer;
 var Nodelayers = mplexnet.NodelayerCollection;
 var Network = mplexnet.Network;
-var Parser = require('../lib/parser');
+var parse = mplexnet.parse;
 var fs = require('fs');
 var Options = require('../lib/options');
 var Baby = require("babyparse");
@@ -46,24 +45,6 @@ input.aspects = aspects;
 input.nodes = nodes;
 input.edges = edges;
 
-
-/*
- Parser
- */
-
-describe('Parser Module: ', function() {
-    before(function () {
-        this.parser = new Parser();
-        this.aspects = this.parser.readAspects(aspects);
-        this.nodes = this.parser.readNodes(nodes);
-        this.edges = this.parser.readEdges(edges);
-    });
-    describe('Parser', function() {
-        it('should create a csv parser object', function() {
-            expect(this.parser).to.exist;
-        });
-    })
-});
 
 /*
  Node Model
@@ -97,10 +78,9 @@ describe('Node Model', function() {
 describe('Nodelayer module', function (){
     describe('Nodelayer', function() {
         before(function () {
-            this.parser = new Parser();
-            this.aspects = this.parser.readAspects(aspects);
-            this.nodes = this.parser.readNodes(nodes);
-            this.edges = this.parser.readEdges(edges);
+            this.aspects = parse(input.aspects)[0];
+            this.nodes = parse(input.nodes, true);
+            this.edges = parse(input.edges, true);
             this.node = new Node(this.nodes[0].name);
             this.layer = new Layer(this.aspects, this.nodes[0]);
             this.nodelayer = new Nodelayer(this.nodes[0].id, this.node, this.layer);
@@ -131,10 +111,9 @@ describe('Nodelayer module', function (){
 describe('Edge Module:', function() {
     describe('Edge', function() {
         before(function() {
-            this.parser = new Parser();
-            this.aspects = this.parser.readAspects(aspects);
-            this.nodes = this.parser.readNodes(nodes);
-            this.edges = this.parser.readEdges(edges);
+            this.aspects = parse(input.aspects)[0];
+            this.nodes = parse(input.nodes, true);
+            this.edges = parse(input.edges, true);
             var node1 = new Node(this.nodes[0].name);
             var node2 = new Node(this.nodes[1].name);
             var layer1 = new Layer(this.aspects, this.nodes[0]);
