@@ -31,7 +31,7 @@ var Nodelayers = mplexnet.NodelayerCollection;
 var Network = mplexnet.Network;
 var parse = mplexnet.parse;
 var fs = require('fs');
-var Options = require('../lib/options');
+var Options = mplexnet.Options;
 var Baby = require("babyparse");
 
 // mock data for tests:
@@ -187,7 +187,7 @@ describe('Mplexnet Module:', function() {
             network = new Network(input);
         });
         it('should do sth', function () {
-            console.log(network);
+            //console.log(network);
         });
     });
 });
