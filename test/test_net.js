@@ -22,13 +22,14 @@ var should = chai.should();
 // requires your main app (specified in mplexnet.js)
 var net = require('../');
 
-var Node = require('../lib/node');
-var Edge = require('../lib/edge');
-var EdgeCol = require('../lib/edgecol');
-var Layer = require('../lib/layer');
-var Nodelayer = require('../lib/nodelayer');
-var Nodelayers = require('../lib/nodelayers');
-var Network = require('../lib/network');
+var mplexnet = require('../lib/mplexnet');
+var Node = mplexnet.Node;
+var Edge = mplexnet.Edge;
+var EdgeCol = mplexnet.EdgeCollection;
+var Layer = mplexnet.Layer;
+var Nodelayer = mplexnet.Nodelayer;
+var Nodelayers = mplexnet.NodelayerCollection;
+var Network = mplexnet.Network;
 var Parser = require('../lib/parser');
 var fs = require('fs');
 var Options = require('../lib/options');
