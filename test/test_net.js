@@ -170,6 +170,7 @@ describe('Mplexnet Module:', function() {
         });
     });
     describe('Network from single file', function () {
+        var network;
         before(function () {
             //var file = fs.readFileSync('./data/single.txt', 'utf-8');
             var file = fs.readFileSync('../Thesis/dataprep/data.csv', 'utf-8');
@@ -183,10 +184,10 @@ describe('Mplexnet Module:', function() {
                 sourceFieldLabel: 'source_name',
                 targetFieldLabel: 'target_name'
             };
-            var network = new Network(input);
+            network = new Network(input);
         });
         it('should do sth', function () {
-
+            console.log(network);
         });
     });
 });
