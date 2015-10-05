@@ -53,8 +53,8 @@ input.edges = edges;
 describe('Node Model', function() {
     describe('Node', function() {
         beforeEach(function() {
-            this.name = 1;
-            this.node = new Node(this.name);
+            this.id = 1;
+            this.node = new Node(this.id);
         });
 
         it('should be created', function() {
@@ -62,11 +62,11 @@ describe('Node Model', function() {
         });
 
         it('should contain a name', function() {
-            should.exist(this.node.get('name'));
+            should.exist(this.node.get('id'));
         });
 
         it('should have a name as has been set', function() {
-            expect(this.node.get("name")).to.equal(this.name);
+            expect(this.node.get("id")).to.equal(this.id);
         });
 
         it('should be an instance of the Node model', function() {
@@ -134,7 +134,7 @@ describe('Edge Module:', function() {
         });
 
         it('should have a defined name', function() {
-            expect(this.edge.get('name')).to.be.defined;
+            expect(this.edge.get('id')).to.be.defined;
         });
 
         it('should assign an name automatically based on the node ids', function() {
