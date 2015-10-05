@@ -9,3 +9,4 @@ examples-out
 data
 mplexnet-0.1.0.tgz
 index.js
+*.tgz
