@@ -1,7 +1,7 @@
 # mplexnet
 
-[![NPM version](http://img.shields.io/npm/v/mplex-net.svg)](https://www.npmjs.org/package/mplexnet) 
-[![Build Status](https://secure.travis-ci.org/DennisSchwartz/mplex-net.png?branch=master)](http://travis-ci.org/DennisSchwartz/mplexnet) 
+[![NPM version](http://img.shields.io/npm/v/mplexnet.svg)](https://www.npmjs.org/package/mplexnet) 
+[![Build Status](https://secure.travis-ci.org/DennisSchwartz/mplexnet.png?branch=master)](http://travis-ci.org/DennisSchwartz/mplexnet) 
 
 > A model for Multilayer/Multiplex/Complex Networks
 

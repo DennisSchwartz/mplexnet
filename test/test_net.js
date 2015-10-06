@@ -1,6 +1,6 @@
 /*
- * mplex-net
- * https://github.com/DennisSchwartz/mplex-net
+ * mplexnet
+ * https://github.com/DennisSchwartz/mplexnet
  *
  * Copyright (c) 2015 Dennis Schwartz
  * Licensed under the MIT license.
