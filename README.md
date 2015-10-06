@@ -1,32 +1,48 @@
-# mplex-net
+# mplexnet
 
-[![NPM version](http://img.shields.io/npm/v/mplex-net.svg)](https://www.npmjs.org/package/mplex-net) 
-[![Build Status](https://secure.travis-ci.org/DennisSchwartz/mplex-net.png?branch=master)](http://travis-ci.org/DennisSchwartz/mplex-net) 
+[![NPM version](http://img.shields.io/npm/v/mplex-net.svg)](https://www.npmjs.org/package/mplexnet) 
+[![Build Status](https://secure.travis-ci.org/DennisSchwartz/mplex-net.png?branch=master)](http://travis-ci.org/DennisSchwartz/mplexnet) 
 
-> A model for Multilayer/Conplex Networks
+> A model for Multilayer/Multiplex/Complex Networks
 
 ## Getting Started
-Install the module with: `npm install mplex-net`
+
+Install the module with: `npm install mplexnet`
 
 ```javascript
-var net = require('mplex-net');
-net.hello("biojs"); // "hello biojs"
+var mplexnet = require('mplexnet');
+var Network = mplexnet.Network;
 ```
 
 ## Documentation
 
-#### .hello(name)
-
-**Parameter**: `name`
-**Type**: `String`
-**Example**: `biojs`
-
-The 'hello' method is responsible for showing a name.
-
-How to use this method
+Create the input for the network:
 
 ```javascript
-net.hello('biojs'); // "hello biojs"
+
+// Input parsed from csv file of edges
+var input = {};
+input.data = 'source,l1,l2,target,l1,l2\n1,A,X,2,A,X\n1,A,X,1,B,X\n1,A,X,4,B,X\n1,B,X,1,B,Y\n1,B,X,3,B,X\n\
+1,B,X,4,B,X\n3,B,X,4,B,X\n4,B,X,3,A,Y\n3,A,Y,3,A,X\n3,A,Y,2,A,Y';
+
+// default options for network model
+input.options = {
+    inputFiles: 'single',
+    inputFileDelimiter: ',',
+    sourceFieldLabel: 'source',
+    targetFieldLabel: 'target',
+    loglevel: 0
+};
+
+```
+
+Then instantiate the network model
+
+```javascript
+var mplexnet = require('mplexnet');
+var Network = mplexnet.Network;
+// create a new network
+var myNetwork = new Network(input);
 ```
 
 ## Contributing
@@ -35,7 +51,7 @@ All contributions are welcome.
 
 ## Support
 
-If you have any problem or suggestion please open an issue [here](https://github.com/DennisSchwartz/mplex-net/issues).
+If you have any problem or suggestion please open an issue [here](https://github.com/DennisSchwartz/mplexnet/issues).
 
 ## License 
 
