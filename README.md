@@ -7,7 +7,10 @@
 
 It is still very much work in progress so beware 
 of updates as your code might break. To visualise a multilayer network, 
-check out [mplexviz-ngraph](https://github.com/DennisSchwartz/mplexviz-ngraph)
+check out [mplexviz-ngraph](https://github.com/DennisSchwartz/mplexviz-ngraph).
+
+This module implements the multilayer network framework put forward here: 
+> Kivelä et al. 2014. Multilayer Networks. Journal of Complex Networks (2014) 2, 203-271. DOI:10.1093/comnet/cnu016
 
 ## Getting Started
 
