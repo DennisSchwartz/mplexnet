@@ -5,6 +5,10 @@
 
 > A model for Multilayer/Multiplex/Complex Networks
 
+It is still very much work in progress so beware 
+of updates as your code might break. To visualise a multilayer network, 
+check out [mplexviz-ngraph](https://github.com/DennisSchwartz/mplexviz-ngraph)
+
 ## Getting Started
 
 Install the module with: `npm install mplexnet`
