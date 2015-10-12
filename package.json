@@ -30,7 +30,8 @@
   "dependencies": {
     "babyparse": "^0.4.3",
     "backbone": "^1.2.3",
-    "lodash": "^3.10.1"
+    "lodash": "^3.10.1",
+    "mkdirp": "0.5.2"
   },
   "devDependencies": {
     "mocha": "1.x",
