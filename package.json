@@ -1,7 +1,7 @@
 {
   "name": "mplexnet",
   "description": "A model for Multilayer/Complex Networks",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "homepage": "https://github.com/DennisSchwartz/mplexnet",
   "author": {
     "name": "Dennis Schwartz",
@@ -31,7 +31,7 @@
     "babyparse": "^0.4.3",
     "backbone": "^1.2.3",
     "lodash": "^3.10.1",
-    "mkdirp": "0.5.2"
+    "mkdirp": "0.5.1"
   },
   "devDependencies": {
     "mocha": "1.x",
