@@ -31,7 +31,8 @@
     "babyparse": "^0.4.3",
     "backbone": "^1.2.3",
     "lodash": "^3.10.1",
-    "mkdirp": "0.5.1"
+    "mkdirp": "0.5.1",
+    "jquery": "^2.1.4"
   },
   "devDependencies": {
     "mocha": "1.x",
