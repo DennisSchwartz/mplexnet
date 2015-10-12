@@ -1,7 +1,7 @@
 {
   "name": "mplexnet",
   "description": "A model for Multilayer/Complex Networks",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "homepage": "https://github.com/DennisSchwartz/mplexnet",
   "author": {
     "name": "Dennis Schwartz",
