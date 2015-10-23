@@ -22,6 +22,7 @@ var should = chai.should();
 // requires your main app (specified in mplexnet.js)
 
 var mplexnet = require('../lib/mplexnet');
+var createTensor = require('../lib/tensor');
 var Node = mplexnet.Node;
 var Edge = mplexnet.Edge;
 var EdgeCol = mplexnet.EdgeCollection;
@@ -146,6 +147,13 @@ describe('Edge Module:', function() {
 describe('Mplexnet Module:', function() {
     describe('Network from multiple files', function() {
         beforeEach(function(){
+            input.options = {
+                inputFiles: 'multiple',
+                inputFileDelimiter: ',',
+                sourceFieldLabel: 'source',
+                targetFieldLabel: 'target',
+                loglevel: 0
+            };
             this.network = new Network(input);
         });
 
@@ -175,7 +183,7 @@ describe('Mplexnet Module:', function() {
             //var file = fs.readFileSync('./data/single.txt', 'utf-8');
             var file = fs.readFileSync('../Thesis/dataprep/data.csv', 'utf-8');
             var input = {};
-            input.edges = file;
+            input.data = file;
             //file = file.replace(/ /g, ''); //remove whitespace
             //var input = Baby.parse(file);//, { header: true });
             input.options = {
@@ -190,4 +198,29 @@ describe('Mplexnet Module:', function() {
             //console.log(network);
         });
     });
+});
+
+describe('Tensor calculations', function () {
+   describe('Tensor creation', function () {
+       var network;
+       before(function () {
+           //var file = fs.readFileSync('./data/single.txt', 'utf-8');
+           var file = fs.readFileSync('../Thesis/dataprep/ONEMORE.csv', 'utf-8');
+           var input = {};
+           input.data = file;
+           //file = file.replace(/ /g, ''); //remove whitespace
+           //var input = Baby.parse(file);//, { header: true });
+           input.options = {
+               inputFiles: 'single',
+               inputFileDelimiter: ',',
+               sourceFieldLabel: 'source',
+               targetFieldLabel: 'target'
+           };
+           network = new Network(input);
+       });
+       it('should create a tensor', function () {
+           createTensor(network);
+           //console.log(network);
+       });
+   });
 });

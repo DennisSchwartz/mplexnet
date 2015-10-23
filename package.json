@@ -20,6 +20,7 @@
       "url": "https://github.com/DennisSchwartz/mplexnet/blob/master/LICENSE"
     }
   ],
+  "license": "MIT",
   "main": "lib/mplexnet.js",
   "scripts": {
     "test": "mocha",
@@ -30,15 +31,15 @@
   "dependencies": {
     "babyparse": "^0.4.3",
     "backbone": "^1.2.3",
+    "jquery": "^2.1.4",
     "lodash": "^3.10.1",
-    "mkdirp": "0.5.1",
-    "jquery": "^2.1.4"
+    "lomath": "^0.2.3",
+    "mkdirp": "0.5.1"
   },
   "devDependencies": {
-    "mocha": "1.x",
+    "mocha": "^2.3.3",
     "browserify": "^11.2.0",
     "chai": "^3.3.0",
-    "mocha": "^2.3.3",
     "watchify": "^3.4.0"
   },
   "keywords": [
