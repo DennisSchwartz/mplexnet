@@ -205,6 +205,7 @@ describe('Tensor calculations', function () {
        var network;
        before(function () {
            //var file = fs.readFileSync('./data/single.txt', 'utf-8');
+           //fs.readFileSync('../Thesis/dataprep/mplex-format.txt', 'utf-8');
            var file = fs.readFileSync('../Thesis/dataprep/ONEMORE.csv', 'utf-8');
            var input = {};
            input.data = file;
