@@ -35,6 +35,7 @@ var fs = require('fs');
 var Options = mplexnet.Options;
 var Baby = require("babyparse");
 
+
 // mock data for tests:
 
 var aspects = fs.readFileSync('./data/Aspects.txt', 'utf8');
@@ -198,6 +199,21 @@ describe('Mplexnet Module:', function() {
             //console.log(network);
         });
     });
+    describe('Network from XGMML file', function () {
+        before(function () {
+            var file = fs.readFileSync('../Thesis/dataprep/test.xml', 'utf-8');
+            var input = {};
+            input.data = file;
+            input.options = {
+                inputFiles: 'xgmml',
+                logLevel: 3
+            };
+            network = new Network(input);
+        });
+        it('should do sth', function () {
+            //Things
+        })
+    });
 });
 
 describe('Tensor calculations', function () {
@@ -220,8 +236,9 @@ describe('Tensor calculations', function () {
            network = new Network(input);
        });
        it('should create a tensor', function () {
-           createTensor(network);
+           //createTensor(network);
            //console.log(network);
+
        });
    });
 });
