@@ -225,6 +225,7 @@ describe('Mplexnet Module:', function() {
         });
     });
     describe('Network from XGMML file', function () {
+        var network;
         before(function () {
             var file = fs.readFileSync('../Thesis/dataprep/test.xml', 'utf-8');
             var input = {};
@@ -255,31 +256,119 @@ describe('Mplexnet Module:', function() {
             expect(edges.length).to.equal(36);
         });
     });
+    describe('Network manipulation', function () {
+        var network;
+        var node = [{
+            group: 'nodes',
+            data: {
+                label: 'Test',
+                layer: 1
+            }
+        }];
+        var edge = [{
+            group: 'edges',
+            data: {
+                source: 'A1',
+                target: 'B2',
+                weight: 2.3
+            }
+        }];
+        var layer = [{
+            group: 'layers',
+            data: {
+                label: 'newLayer',
+                aspects: {
+                    '1': '3'        // Does this actually work??
+                }
+            }
+        }];
+        before(function () {
+            var file = fs.readFileSync('../Thesis/dataprep/test.xml', 'utf-8');
+            var input = {};
+            input.data = file;
+            input.options = {
+                inputFiles: 'xgmml',
+                logLevel: 0
+            };
+            network = new Network(input);
+        });
+        it('should allow users to add nodes', function () {
+            var before = network.get('nodes').length;
+            network.add(node);
+            var after = network.get('nodes').length;
+            expect(after).to.equal( before + 1 );
+        });
+        it('should allow users to add edges', function () {
+            var before = network.get('edges').length;
+            network.add(edge);
+            var after = network.get('edges').length;
+            expect(after).to.equal( before + 1 );
+        });
+        it('should allow users to add layers', function () {
+            var before = network.get('layers').length;
+            network.add(layer);
+            var after = network.get('layers').length;
+            //console.log(network.get('layers'));
+            expect(after).to.equal( before + 1 );
+        });
+        it('should allow users to remove nodes', function () {
+            var before = network.get('nodes').length;
+            var n = network.get('nodes').get(node[0].data.label + node[0].data.layer);
+            expect(n).to.be.defined;
+            network.remove([{ group: "nodes", id: n.get('id')}]);
+            var after = network.get('nodes').length;
+            n = network.get('nodes').get(node[0].data.label + node[0].data.layer);
+            expect(after).to.equal(before - 1);
+            expect(n).to.be.undefined;
+        });
+        it('should allow users to remove edges', function () {
+            var before = network.get('edges').length;
+            var e = network.get('edges').get(edge[0].data.source + '-' + edge[0].data.target);
+            var id = e.get('id');
+            expect(e).to.be.defined;
+            network.remove([{ group: "edges", id: id }]);
+            e = network.get('edges').get(edge[0].data.source + '-' + edge[0].data.target);
+            expect(e).to.be.undefined;
+            var after = network.get('edges').length;
+            expect(after).to.equal(before - 1);
+        });
+        it('should allow users to remove layers', function () {
+            var before = network.get('layers').length;
+            var l = network.get('layers').get(layer[0].data.aspects['1']);
+            var id = l.get('id');
+            expect(l).to.be.defined;
+            network.remove([{ group: "layers", id: id }]);
+            l = network.get('layers').get(layer[0].data.aspects['1']);
+            expect(l).to.be.undefined;
+            var after = network.get('layers').length;
+            expect(after).to.equal(before - 1);
+        });
+    });
 });
-
-describe('Tensor calculations', function () {
-   describe('Tensor creation', function () {
-       var network;
-       before(function () {
-           //var file = fs.readFileSync('./data/single.txt', 'utf-8');
-           //fs.readFileSync('../Thesis/dataprep/mplex-format.txt', 'utf-8');
-           var file = fs.readFileSync('../Thesis/dataprep/ONEMORE.csv', 'utf-8');
-           var input = {};
-           input.data = file;
-           //file = file.replace(/ /g, ''); //remove whitespace
-           //var input = Baby.parse(file);//, { header: true });
-           input.options = {
-               inputFiles: 'csv',
-               inputFileDelimiter: ',',
-               sourceFieldLabel: 'source',
-               targetFieldLabel: 'target'
-           };
-           network = new Network(input);
-       });
-       it('should createNetwork a tensor', function () {
-           //createTensor(network);
-           //console.log(network);
-
-       });
-   });
-});
+//
+//describe('Tensor calculations', function () {
+//   describe('Tensor creation', function () {
+//       var network;
+//       before(function () {
+//           //var file = fs.readFileSync('./data/single.txt', 'utf-8');
+//           //fs.readFileSync('../Thesis/dataprep/mplex-format.txt', 'utf-8');
+//           var file = fs.readFileSync('../Thesis/dataprep/ONEMORE.csv', 'utf-8');
+//           var input = {};
+//           input.data = file;
+//           //file = file.replace(/ /g, ''); //remove whitespace
+//           //var input = Baby.parse(file);//, { header: true });
+//           input.options = {
+//               inputFiles: 'csv',
+//               inputFileDelimiter: ',',
+//               sourceFieldLabel: 'source',
+//               targetFieldLabel: 'target'
+//           };
+//           network = new Network(input);
+//       });
+//       it('should createNetwork a tensor', function () {
+//           //createTensor(network);
+//           //console.log(network);
+//
+//       });
+//   });
+//});
