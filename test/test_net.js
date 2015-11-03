@@ -30,10 +30,18 @@ var Layer = mplexnet.Layer;
 var Nodelayer = mplexnet.Nodelayer;
 var Nodelayers = mplexnet.NodelayerCollection;
 var Network = mplexnet.Network;
-var parse = mplexnet.parse;
 var fs = require('fs');
 var Options = mplexnet.Options;
 var Baby = require("babyparse");
+
+var parse = function (input, header) {
+    input = input.replace(/ /g, ''); //remove whitespace
+    if (!header) header = false;
+    return Baby.parse(input, {
+        header: header,
+        skipEmptyLines: true
+    }).data;
+};
 
 
 // mock data for tests:
@@ -149,7 +157,7 @@ describe('Mplexnet Module:', function() {
     describe('Network from multiple files', function() {
         beforeEach(function(){
             input.options = {
-                inputFiles: 'multiple',
+                inputFiles: 'split',
                 inputFileDelimiter: ',',
                 sourceFieldLabel: 'source',
                 targetFieldLabel: 'target',
@@ -188,7 +196,7 @@ describe('Mplexnet Module:', function() {
             //file = file.replace(/ /g, ''); //remove whitespace
             //var input = Baby.parse(file);//, { header: true });
             input.options = {
-                inputFiles: 'single',
+                inputFiles: 'csv',
                 inputFileDelimiter: ';',
                 sourceFieldLabel: 'source_name',
                 targetFieldLabel: 'target_name',
@@ -261,7 +269,7 @@ describe('Tensor calculations', function () {
            //file = file.replace(/ /g, ''); //remove whitespace
            //var input = Baby.parse(file);//, { header: true });
            input.options = {
-               inputFiles: 'single',
+               inputFiles: 'csv',
                inputFileDelimiter: ',',
                sourceFieldLabel: 'source',
                targetFieldLabel: 'target'

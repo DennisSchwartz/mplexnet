@@ -33,7 +33,7 @@ input.data = 'source,l1,l2,target,l1,l2\n1,A,X,2,A,X\n1,A,X,1,B,X\n1,A,X,4,B,X\n
 
 // default options for network model
 input.options = {
-    inputFiles: 'single',
+    inputFiles: 'csv',
     inputFileDelimiter: ',',
     sourceFieldLabel: 'source',
     targetFieldLabel: 'target',
