@@ -173,7 +173,7 @@ describe('Mplexnet Module:', function() {
             expect(this.network.get('aspects')).to.be.defined;
         });
 
-        it('should create the right number of edges', function () {
+        it('should createNetwork the right number of edges', function () {
             var edges = this.network.get('edges');
             expect(edges.length).to.equal(10);
         });
@@ -191,12 +191,29 @@ describe('Mplexnet Module:', function() {
                 inputFiles: 'single',
                 inputFileDelimiter: ';',
                 sourceFieldLabel: 'source_name',
-                targetFieldLabel: 'target_name'
+                targetFieldLabel: 'target_name',
+                loglevel: 0
             };
             network = new Network(input);
         });
-        it('should do sth', function () {
-            //console.log(network);
+        it('should contain nodes as nodelayers', function() {
+            expect(network.get('nodes')).to.be.an.instanceof(Nodelayers);
+        });
+
+        it('should contain edges', function() {
+            var edges = network.get('edges');
+            expect(edges).to.be.defined;
+            expect(edges).to.be.an.instanceof(EdgeCol);
+            expect(edges.length).to.be.above(1);
+        });
+
+        it('should contain the aspects of the network', function() {
+            expect(network.get('aspects')).to.be.defined;
+        });
+
+        it('should createNetwork the right number of edges', function () {
+            var edges = network.get('edges');
+            expect(edges.length).to.equal(66);
         });
     });
     describe('Network from XGMML file', function () {
@@ -210,9 +227,25 @@ describe('Mplexnet Module:', function() {
             };
             network = new Network(input);
         });
-        it('should do sth', function () {
-            //Things
-        })
+        it('should contain nodes as nodelayers', function() {
+            expect(network.get('nodes')).to.be.an.instanceof(Nodelayers);
+        });
+
+        it('should contain edges', function() {
+            var edges = network.get('edges');
+            expect(edges).to.be.defined;
+            expect(edges).to.be.an.instanceof(EdgeCol);
+            expect(edges.length).to.be.above(1);
+        });
+
+        it('should contain the aspects of the network', function() {
+            expect(network.get('aspects')).to.be.defined;
+        });
+
+        it('should createNetwork the right number of edges', function () {
+            var edges = network.get('edges');
+            expect(edges.length).to.equal(36);
+        });
     });
 });
 
@@ -235,7 +268,7 @@ describe('Tensor calculations', function () {
            };
            network = new Network(input);
        });
-       it('should create a tensor', function () {
+       it('should createNetwork a tensor', function () {
            //createTensor(network);
            //console.log(network);
 

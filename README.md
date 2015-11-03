@@ -47,7 +47,7 @@ Then instantiate the network model
 ```javascript
 var mplexnet = require('mplexnet');
 var Network = mplexnet.Network;
-// create a new network
+// createNetwork a new network
 var myNetwork = new Network(input);
 ```
 
