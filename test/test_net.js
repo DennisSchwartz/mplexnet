@@ -157,7 +157,7 @@ describe('Mplexnet Module:', function() {
     describe('Network from multiple files', function() {
         beforeEach(function(){
             input.options = {
-                inputFiles: 'split',
+                inputFormat: 'split',
                 inputFileDelimiter: ',',
                 sourceFieldLabel: 'source',
                 targetFieldLabel: 'target',
@@ -196,7 +196,7 @@ describe('Mplexnet Module:', function() {
             //file = file.replace(/ /g, ''); //remove whitespace
             //var input = Baby.parse(file);//, { header: true });
             input.options = {
-                inputFiles: 'csv',
+                inputFormat: 'csv',
                 inputFileDelimiter: ';',
                 sourceFieldLabel: 'source_name',
                 targetFieldLabel: 'target_name',
@@ -231,7 +231,7 @@ describe('Mplexnet Module:', function() {
             var input = {};
             input.data = file;
             input.options = {
-                inputFiles: 'xgmml',
+                inputFormat: 'xgmml',
                 logLevel: 3
             };
             network = new Network(input);
@@ -287,7 +287,7 @@ describe('Mplexnet Module:', function() {
             var input = {};
             input.data = file;
             input.options = {
-                inputFiles: 'xgmml',
+                inputFormat: 'xgmml',
                 logLevel: 0
             };
             network = new Network(input);
@@ -358,7 +358,7 @@ describe('Mplexnet Module:', function() {
 //           //file = file.replace(/ /g, ''); //remove whitespace
 //           //var input = Baby.parse(file);//, { header: true });
 //           input.options = {
-//               inputFiles: 'csv',
+//               inputFormat: 'csv',
 //               inputFileDelimiter: ',',
 //               sourceFieldLabel: 'source',
 //               targetFieldLabel: 'target'
