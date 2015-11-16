@@ -33,6 +33,9 @@ input.data = 'source,l1,l2,target,l1,l2\n1,A,X,2,A,X\n1,A,X,1,B,X\n1,A,X,4,B,X\n
 
 // default options for network model
 input.options = {
+    /*  If you not specify a format,
+        the model will try to guess it from the input
+     */
     inputFormat: 'csv',
     inputFileDelimiter: ',',
     sourceFieldLabel: 'source',
@@ -53,7 +56,7 @@ var myNetwork = new Network(input);
 
 ## Contributing
 
-All contributions are welcome.
+All contributions are welcome once I have reached version 1.0.
 
 ## Support
 

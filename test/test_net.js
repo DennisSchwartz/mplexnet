@@ -22,7 +22,6 @@ var should = chai.should();
 // requires your main app (specified in mplexnet.js)
 
 var mplexnet = require('../lib/mplexnet');
-var createTensor = require('../lib/tensor');
 var Node = mplexnet.Node;
 var Edge = mplexnet.Edge;
 var EdgeCol = mplexnet.EdgeCollection;
@@ -345,30 +344,3 @@ describe('Mplexnet Module:', function() {
         });
     });
 });
-//
-//describe('Tensor calculations', function () {
-//   describe('Tensor creation', function () {
-//       var network;
-//       before(function () {
-//           //var file = fs.readFileSync('./data/single.txt', 'utf-8');
-//           //fs.readFileSync('../Thesis/dataprep/mplex-format.txt', 'utf-8');
-//           var file = fs.readFileSync('../Thesis/dataprep/ONEMORE.csv', 'utf-8');
-//           var input = {};
-//           input.data = file;
-//           //file = file.replace(/ /g, ''); //remove whitespace
-//           //var input = Baby.parse(file);//, { header: true });
-//           input.options = {
-//               inputFormat: 'csv',
-//               inputFileDelimiter: ',',
-//               sourceFieldLabel: 'source',
-//               targetFieldLabel: 'target'
-//           };
-//           network = new Network(input);
-//       });
-//       it('should createNetwork a tensor', function () {
-//           //createTensor(network);
-//           //console.log(network);
-//
-//       });
-//   });
-//});
